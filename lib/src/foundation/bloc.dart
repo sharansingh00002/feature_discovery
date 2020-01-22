@@ -106,7 +106,12 @@ class Bloc {
 
   void dismiss() {
     _eventsIn.add(EventType.dismiss);
-
+    _activeStepIndex++;
+    _activeOverlays = 0;
+    if (_activeStepIndex < _steps.length) {
+      _eventsIn.add(EventType.open);
+      return;
+    }
     _steps = null;
     _activeStepIndex = null;
     _activeOverlays = 0;
